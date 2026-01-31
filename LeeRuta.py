@@ -1,18 +1,23 @@
 import os
 import pyodbc
+# import pymssql
 
 # Ruta de los archivos
-RUTA = r"C:\ruta\a\tu\directorio"
+RUTA = r"C:\Users\seguc\OneDrive\Pictures\_IMPRIMIR"
 
 # Cadena de conexión (ajusta servidor, bd, usuario, password)
 conn = pyodbc.connect(
-    "DRIVER={ODBC Driver 17 for SQL Server};"
-    "SERVER=localhost;"
-    "DATABASE=TuBaseDeDatos;"
-    "UID=usuario;"
-    "PWD=password"
+    "DRIVER={ODBC Driver 18 for SQL Server};"
+    "SERVER=(localdb)\MSSQLLocalDB;"
+    "DATABASE=Fotos;"
+    "Trusted_Connection=yes;"
 )
 
+# conn = pymssql.connect(
+#     server='(localdb)\MSSQLLocalDB)',
+#     database='Fotos',
+#     trusted=True  # Esto usa autenticación de Windows
+# )
 cursor = conn.cursor()
 
 try:
@@ -21,7 +26,7 @@ try:
 
         if os.path.isfile(ruta_completa):
             cursor.execute(
-                "INSERT INTO archivos (nombre) VALUES (?)",
+                "INSERT INTO FotosDCIM (nombre) VALUES (?)",
                 (archivo,)
             )
 
