@@ -3,7 +3,7 @@ import pyodbc
 # import pymssql
 
 # Ruta de los archivos
-RUTA = r"C:\Users\seguc\OneDrive\Pictures\_IMPRIMIR"
+RUTA = r"C:\Users\seguc\OneDrive\Pictures\Álbum de cámara"
 
 # Cadena de conexión (ajusta servidor, bd, usuario, password)
 conn = pyodbc.connect(
@@ -21,14 +21,15 @@ conn = pyodbc.connect(
 cursor = conn.cursor()
 
 try:
-    for archivo in os.listdir(RUTA):
-        ruta_completa = os.path.join(RUTA, archivo)
+    for i in range(30):
+        for archivo in os.listdir(RUTA):
+            ruta_completa = os.path.join(RUTA, archivo)
 
-        if os.path.isfile(ruta_completa):
-            cursor.execute(
-                "INSERT INTO FotosDCIM (nombre) VALUES (?)",
-                (archivo,)
-            )
+            if os.path.isfile(ruta_completa):
+                cursor.execute(
+                    "INSERT INTO FotosDCIM (nombre) VALUES (?)",
+                    (archivo,)
+                )
 
     conn.commit()
     print("Archivos guardados en SQL Server.")
