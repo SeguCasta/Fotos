@@ -5,7 +5,7 @@ from datetime import datetime
 # Cadena de conexión (ajusta servidor, bd, usuario, password)
 conn = pyodbc.connect(
     "DRIVER={ODBC Driver 18 for SQL Server};"
-    "SERVER=(localdb)\MSSQLLocalDB;"
+    r"SERVER=(localdb)\MSSQLLocalDB;"
     "DATABASE=Fotos;"
     "Trusted_Connection=yes;"
 )
