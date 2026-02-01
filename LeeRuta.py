@@ -28,6 +28,11 @@ try:
             for archivo in archivos:
                 ruta_completa = os.path.join(raiz, archivo)
 
+                # Filtrar solo archivos con extensión .jpg o .dng (no distingue mayúsculas/minúsculas)
+                ext = os.path.splitext(archivo)[1].lower()
+                if ext not in ('.jpg', '.dng'):
+                    continue
+
                 if os.path.isfile(ruta_completa):
                     # Obtener la fecha de creación
                     timestamp = os.path.getctime(ruta_completa)
@@ -39,10 +44,13 @@ try:
                     
                     # Obtener el tamaño del archivo en bytes
                     size = os.path.getsize(ruta_completa)
+
+                    # Tipo: extensión en minúsculas sin el punto (ej: 'jpg', 'dng')
+                    tipo = ext.lstrip('.')
                     
                     cursor.execute(
-                        "INSERT INTO FotosDCIM (nombre, fechacreacion, fechamodificacion, ruta, isize) VALUES (?, ?, ?, ?, ?)",
-                        (archivo, fecha_creacion, fecha_modificacion, raiz, int(size))
+                        "INSERT INTO FotosDCIM (nombre, fechacreacion, fechamodificacion, ruta, isize, Tipo) VALUES (?, ?, ?, ?, ?, ?)",
+                        (archivo, fecha_creacion, fecha_modificacion, raiz, int(size), tipo)
                     )
 
     conn.commit()
