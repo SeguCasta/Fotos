@@ -11,11 +11,11 @@ TABLA = "dbo.CopiaFicheros"
 
 CONN_STR = (
     "DRIVER={ODBC Driver 18 for SQL Server};"
-    f"SERVER={SERVER};"
-    f"DATABASE={DATABASE};"
+    r"SERVER=(localdb)\MSSQLLocalDB;"
+    "DATABASE=Fotos;"
     "Trusted_Connection=yes;"
-    "TrustServerCertificate=yes;"
 )
+
 
 LOG_FILE = "copiador_ficheros.log"
 
@@ -42,6 +42,12 @@ def copiar_ficheros():
     filas = cursor.fetchall()
 
     for id_, ruta_origen, nombre_fichero, ruta_destino in filas:
+        # Eliminar espacios finales en ruta_origen y nombre_fichero
+        if isinstance(ruta_origen, str):
+            ruta_origen = ruta_origen.strip()
+        if isinstance(nombre_fichero, str):
+            nombre_fichero = nombre_fichero.strip()
+
         origen = os.path.join(ruta_origen, nombre_fichero)
         destino = os.path.join(ruta_destino, nombre_fichero)
 
