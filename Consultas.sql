@@ -13,9 +13,9 @@ select *
 from FotosDCIM
 where 
 1=1
---and nombre='IMG-20161212-WA0001.jpg                                                                             '
+and nombre='20220508_100732.dng                                                                                 '
 --and ruta='C:\Users\seguc\OneDrive\Pictures\Albunes\Pueblo'
-and ruta='C:\Users\seguc\OneDrive\Pictures\Galería de Samsung\Pueblo'
+--and ruta='C:\Users\seguc\OneDrive\Pictures\Galería de Samsung\Pueblo'
 
 select count(*)
 from fotosdcim
@@ -25,3 +25,22 @@ select count(*)
 from fotosdcim
 where ruta='C:\Users\seguc\OneDrive\Pictures\Galería de Samsung\Pueblo                                                                                                                                                                                                '
 
+/* marcar fotos fuera de galeria de samsung que estan Si/No en galeria de Samsung
+*/
+
+select f1.id, f1.ruta, f1.nombre
+from FotosDCIM f1
+where
+1=1
+and ruta not like '%galería de samsung%'
+and ruta not like '%pictures\ursula%'
+and ruta not like '%pictures\escaneos%'
+and ruta not like '%pictures\mis escaneos%'
+and ruta not like '%pictures\my scans%'
+and ruta not like '%pictures\libros%'
+and not exists (
+	select nombre 
+	from fotosdcim
+	where ruta<>f1.ruta and nombre = f1.nombre
+	)
+order by ruta, Nombre

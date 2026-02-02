@@ -50,7 +50,7 @@ try:
                     
                     cursor.execute(
                         "INSERT INTO FotosDCIM (nombre, fechacreacion, fechamodificacion, ruta, isize, Tipo) VALUES (?, ?, ?, ?, ?, ?)",
-                        (archivo, fecha_creacion, fecha_modificacion, raiz, int(size), tipo)
+                        (archivo.strip(), fecha_creacion, fecha_modificacion, raiz.strip(), int(size), tipo)
                     )
 
     conn.commit()
