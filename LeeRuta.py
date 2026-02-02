@@ -28,9 +28,9 @@ try:
             for archivo in archivos:
                 ruta_completa = os.path.join(raiz, archivo)
 
-                # Filtrar solo archivos con extensión .jpg o .dng (no distingue mayúsculas/minúsculas)
+                # Filtrar solo archivos con extensión .jpg o .dng o .mp4(no distingue mayúsculas/minúsculas)
                 ext = os.path.splitext(archivo)[1].lower()
-                if ext not in ('.jpg', '.dng'):
+                if ext not in ('.jpg', '.dng', '.mp4'):
                     continue
 
                 if os.path.isfile(ruta_completa):
