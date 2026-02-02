@@ -60,7 +60,7 @@ def copiar_ficheros():
             if os.path.exists(destino):
                 raise FileExistsError(f"El fichero ya existe en destino: {destino}")
 
-            shutil.copy2(origen, destino)
+            shutil.move(origen, destino)
 
             cursor.execute(f"""
                 UPDATE {TABLA}
@@ -71,7 +71,7 @@ def copiar_ficheros():
             """, datetime.now(), id_)
 
             conn.commit()
-            logging.info(f"Copiado OK: {origen} -> {destino}")
+            logging.info(f"Movido OK: {origen} -> {destino}")
 
         except Exception as e:
             conn.rollback()
