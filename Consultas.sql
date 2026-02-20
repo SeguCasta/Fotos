@@ -14,8 +14,8 @@ select *
 from FotosDCIM
 where 
 1=1
-and nombre like '%imag%'
---and ruta='C:\Users\seguc\OneDrive\Pictures\Albunes\Pueblo'
+--and nombre = '20170818_085516~3.jpg'                                                                              '                                                                                 %'
+and ruta='C:\Users\seguc\OneDrive\Pictures\Albunes\Pueblo'
 --and ruta='C:\Users\seguc\OneDrive\Pictures\Galería de Samsung\Pueblo'
 
 select count(*)

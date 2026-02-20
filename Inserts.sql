@@ -11,6 +11,7 @@ CREATE TABLE dbo.CopiaFicheros (
 
 */
 --Insert into CopiaFicheros
+-- 'C:\Users\seguc\OneDrive\Pictures\Galería de Samsung\DCIM\Camera'
 select f1.ruta as RutaOrigen, f1.nombre as NombreFichero, 'C:\Users\seguc\OneDrive\Pictures\Galería de Samsung' as RutaDestino, 0, '01/01/1999',NULL
 from FotosDCIM f1
 where
@@ -29,7 +30,7 @@ and not exists (
 	where ruta<>f1.ruta and nombre = f1.nombre
 	)
 
-and ruta like 'C:\Users\seguc\OneDrive\Pictures\Álbum de cámara%'
+and ruta like 'C:\Users\seguc\OneDrive\Pictures\Albunes%'
 order by ruta, Nombre
 
 /*
